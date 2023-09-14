@@ -32,3 +32,6 @@
 
 # Python
 *.pyc
+
+# vscode config
+* .vscode
