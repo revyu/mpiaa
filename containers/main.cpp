@@ -7,8 +7,10 @@
 #include <algorithm>
 #include <numeric>
 #include <random>
+#include <chrono>
 
 using namespace std;
+using namespace std:: chrono;
 
 template <typename S> void print(const S& s) {
     
@@ -42,7 +44,7 @@ vector<int> random_sequence(int size, int max) {
 
 int main(int argc, char **argv) {
     const int size = (argc > 1 ? stoi(argv[1]) : 10);
-    cout<<size<< endl;
+    
     // Container to use.
     vector<int> my_vec_push;
     vector<int> my_vec_ins;
@@ -53,69 +55,112 @@ int main(int argc, char **argv) {
  
     //добавление 
     const auto elems_to_add = shuffled_sequence(size);
-    // pushback into vector 
+    
+    auto t1=steady_clock:: now();
     for (const auto &elem: elems_to_add) {
         my_vec_push.push_back(elem);
     }
-    // insert into begin
+    auto t2=steady_clock::now();
+
+    auto time = duration<double>(t2 - t1).count();
+    cout << "vector_pushback for "<< size << " size is:"<<time << " sec." << endl;
+
+
+    t1=steady_clock:: now();
+    
     for (const auto &elem: elems_to_add) {
         my_vec_ins.insert(my_vec_ins.begin(),elem);
     }
+    t2=steady_clock::now();
 
+    time = duration<double>(t2 - t1).count();
+    cout << "vector insert for "<< size << " size is:"<<time << " sec." << endl;
+
+    t1=steady_clock:: now();
     for (const auto &elem: elems_to_add) {
         my_list_push.push_back(elem);
     }
+    t2=steady_clock::now();
+    time = duration<double>(t2 - t1).count();
+    cout << "list pushback for "<< size << " size is:"<<time << " sec." << endl;
 
+    t1=steady_clock:: now();
     for (const auto &elem: elems_to_add) {
         my_list_ins.insert(my_list_ins.begin(),elem);
     }
+    t2=steady_clock::now();
+    time = duration<double>(t2 - t1).count();
+    cout << "list insert for "<< size << " size is:"<<time << " sec." << endl;
 
+    t1=steady_clock:: now();
     for (const auto &elem: elems_to_add) {
         my_set.insert(elem);
     }
+    t2=steady_clock::now();
+    time = duration<double>(t2 - t1).count();
+    cout << "set insert for "<< size << " size is:"<<time << " sec." << endl;
 
+    t1=steady_clock:: now();
     for (const auto &elem: elems_to_add) {
         my_unordered_set.insert(elem);
     }
-
+    t2=steady_clock::now();
+    time = duration<double>(t2 - t1).count();
+    cout << "unordered set insert for "<< size << " size is:"<<time << " sec." << endl;
     
     // Perform search into container.
     
+    
     int hits = 0;
     const auto elems_to_search = random_sequence(1000, 2 * size);
+
+    t1=steady_clock:: now();
     for (const auto &elem: elems_to_search) {
         auto it = find(my_vec_push.begin(), my_vec_push.end(), elem);
         if (it != my_vec_push.end()) {
             hits++;
         }        
     }
+    t2=steady_clock::now();
+    time = duration<double>(t2 - t1).count();
+    cout << "vector find for "<< size << " size is:"<<time << " sec." << endl;
 
     hits=0;
-    
+
+    t1=steady_clock:: now();
     for (const auto &elem: elems_to_search) {
         auto it = find(my_list_push.begin(), my_list_push.end(), elem);
         if (it != my_list_push.end()) {
             hits++;
         }        
     }
+    t2=steady_clock::now();
+    time = duration<double>(t2 - t1).count();
+    cout << "list find for "<< size << " size is:"<<time << " sec." << endl;
 
     hits=0;
-    
+    t1=steady_clock:: now();
     for (const auto &elem: elems_to_search) {
-        auto it = find(my_set.begin(), my_set.end(), elem);
+        auto it = my_set.find(elem);
         if (it != my_set.end()) {
             hits++;
         }        
     }
+    t2=steady_clock::now();
+    time = duration<double>(t2 - t1).count();
+    cout << "set find for "<< size << " size is:"<<time << " sec." << endl;
 
     hits=0;
-    
+
+    t1=steady_clock:: now();
     for (const auto &elem: elems_to_search) {
-        auto it = find(my_unordered_set.begin(), my_unordered_set.end(), elem);
+        auto it = my_unordered_set.find(elem);
         if (it != my_unordered_set.end()) {
             hits++;
         }        
     }
-    
+    t2=steady_clock::now();
+    time = duration<double>(t2 - t1).count();
+    cout << "unordered set find for "<< size << " size is:"<<time << " sec." << endl;
 
 }
