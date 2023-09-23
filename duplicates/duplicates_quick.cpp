@@ -1,8 +1,8 @@
-#include "duplicates.h"
+#include <vector>
 #include <set>
 using namespace std;
 
-bool has_duplicates(const std::vector<int> &data) {
+bool has_duplicates_quick(const std::vector<int> &data) {
     set<int> my_set(data.begin(),data.end());
     if (my_set.size()==data.size()){
         return false;
@@ -11,7 +11,7 @@ bool has_duplicates(const std::vector<int> &data) {
     return true;
 }
 
-std::vector<int> get_duplicates(const std::vector<int> &data) {
+std::vector<int> get_duplicates_quick(const std::vector<int> &data) {
     std::vector<int> result;
     set<int> my_set;
     for(const auto & elem: data){

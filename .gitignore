@@ -26,6 +26,7 @@
 *.exe
 *.out
 *.app
+tempCodeRunnerFile.cpp
 
 # Qt stuff
 *.user
@@ -34,4 +35,5 @@
 *.pyc
 
 # vscode config
-* .vscode
+*.vscode
+
