@@ -1,9 +1,8 @@
+#include "duplicates.h"
 
-#include <vector>
-#include <set>
 using namespace std;
 
-bool has_duplicates_brute(const std::vector<int> &data) {
+bool has_duplicates(const std::vector<int> &data) {
     for (int i=0;i<data.size();i++){
         for (int j=i;j<data.size();j++ ){
             if (data[i]==data[j]){return true;}
@@ -12,7 +11,7 @@ bool has_duplicates_brute(const std::vector<int> &data) {
     return false;
 }
 
-vector<int> get_duplicates_brute(const std::vector<int> &data) {
+vector<int> get_duplicates(const std::vector<int> &data) {
     std::vector<int> result;
     for (int i=0;i<data.size();i++){
         for (int j=i;j<data.size();j++ ){

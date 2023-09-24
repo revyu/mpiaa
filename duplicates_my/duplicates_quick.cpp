@@ -11,12 +11,12 @@ bool has_duplicates_quick(const std::vector<int> &data) {
     return true;
 }
 
-std::vector<int> get_duplicates_quick(const std::vector<int> &data) {
-    std::vector<int> result;
+std::set<int> get_duplicates_quick(const std::vector<int> &data) {
     set<int> my_set;
+    set<int> result; //to do : make it vector
     for(const auto & elem: data){
         if (my_set.find(elem)!=my_set.end()){//elem есть в set
-            result.push_back(elem);
+            result.insert(elem);
             }
         my_set.insert(elem);
     }
