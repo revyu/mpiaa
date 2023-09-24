@@ -1,47 +1,58 @@
 #include "duplicates_quick.cpp"
-#include "../catch.hpp"
-
 #include <algorithm>
+#include <cassert>
+#include <set>
+#include <iostream>
 
-template <class T>
-std::vector<T> sorted(const typename std::vector<T> &data) {
-    typename std::vector<T> sorted_data = data;
-    std::sort(sorted_data.begin(), sorted_data.end());
-    return sorted_data;
-}
 
-TEST_CASE ("Empty array") {
+void test_empty_array() {
     const std::vector<int> data = {};
-    CHECK_FALSE(has_duplicates_quick(data));
-    CHECK(sorted(get_duplicates_quick(data)) == std::vector<int> {});
+    assert(!has_duplicates_quick(data));
+    assert(get_duplicates_quick(data) == std::set<int>{});
 }
 
-TEST_CASE ("Single element") {
+void test_single_element() {
     const std::vector<int> data = {1};
-    CHECK_FALSE(has_duplicates_quick(data));
-    CHECK(sorted(get_duplicates_quick(data)) == std::vector<int> {});
+    assert(!has_duplicates_quick(data));
+    assert(get_duplicates_quick(data) == std::set<int>{});
 }
 
-TEST_CASE ("Many elements") {
+void test_many_elements() {
     const std::vector<int> data = {2, 1, -4, 7};
-    CHECK_FALSE(has_duplicates_quick(data));
-    CHECK(sorted(get_duplicates_quick(data)) == std::vector<int> {});
+    assert(!has_duplicates_quick(data));
+    assert(get_duplicates_quick(data) == std::set<int>{});
 }
 
-TEST_CASE ("Many elements, one duplicate") {
+void test_many_elements_one_duplicate() {
     const std::vector<int> data = {2, -3, 0, 2, 7, 1};
-    CHECK(has_duplicates_quick(data));
-    CHECK(sorted(get_duplicates_quick(data)) == std::vector<int> {2});
+    assert(has_duplicates_quick(data));
+    assert(get_duplicates_quick(data) == std::set<int>{2});
 }
 
-TEST_CASE ("Many elements, many duplicates") {
+void test_many_elements_many_duplicates() {
     const std::vector<int> data = {2, -3, 0, 2, 1, -3, 4, 1, -1, 2};
-    CHECK(has_duplicates_quick(data));
-    CHECK(sorted(get_duplicates_quick(data)) == std::vector<int> {-3, 1, 2});
+    assert(has_duplicates_quick(data));
+    std::set<int> expected={-3,1,2};
+    assert(get_duplicates_quick(data) == expected);
 }
 
-TEST_CASE ("Single duplicated elem") {
+void test_single_duplicated_elem() {
     const std::vector<int> data = {4, 4, 4, 4};
-    CHECK(has_duplicates_quick(data));
-    CHECK(sorted(get_duplicates_quick(data)) == std::vector<int> {4});
+    assert(has_duplicates_quick(data));
+    assert(get_duplicates_quick(data) == std::set<int>{4});
 }
+
+int main() {
+    test_empty_array();
+    test_single_element();
+    test_many_elements();
+    test_many_elements_one_duplicate();
+    test_many_elements_many_duplicates();
+    test_single_duplicated_elem();
+
+    std::cout << "All tests passed successfully!" << std::endl;
+
+    return 0;
+}
+
+
