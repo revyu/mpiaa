@@ -78,18 +78,28 @@ int main(int argc, char **argv) {
     cin>>size>>vmin>>vmax;
 
     vector<int> gen_duplicates = generateRandomVectorWithDuplicates(size, vmin, vmax);
-    vector <int> gen_no_duplicates=generateRandomVectorWithoutDuplicates(size,vmin,vmax);
-
-    print(gen_duplicates);
-    bool flag;
     
+    auto t1=steady_clock::now();
     has_duplicates_brute(gen_duplicates);
-    print(get_duplicates_brute(gen_duplicates));
-    cout<<has_duplicates_quick(gen_duplicates)<<endl;
-    print(get_duplicates_quick(gen_duplicates));
+    auto t2=steady_clock::now();
+    cout <<"for size="<< size << " time has_duplicates_brute is :" <<duration<double>(t2 - t1).count()<<endl;
+
+    /*
+    t1=steady_clock::now();
+    get_duplicates_brute(gen_duplicates);
+    t2=steady_clock::now();
+    cout <<"for size="<< size << " time get_duplicates_brute is :" <<duration<double>(t2 - t1).count()<<endl;
+    */
 
     
+    t1=steady_clock::now();
+    has_duplicates_quick(gen_duplicates);
+    t2=steady_clock::now();
+    cout <<"for size="<< size << " time has_duplicates_quick is :" <<duration<double>(t2 - t1).count()<<endl;
 
+    t1=steady_clock::now();
+    get_duplicates_quick(gen_duplicates);
+    t2=steady_clock::now();
+    cout <<"for size="<< size << " time get_duplicates_quick is :" <<duration<double>(t2 - t1).count()<<endl;
 
-    
-}
+    }
