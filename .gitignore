@@ -36,4 +36,5 @@ tempCodeRunnerFile.cpp
 
 # vscode config
 *.vscode
+*.json
 
