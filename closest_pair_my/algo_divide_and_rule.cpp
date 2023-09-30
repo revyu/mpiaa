@@ -40,7 +40,7 @@ pair<Point, Point> closest_pair_between(vector<Point> pleft, vector<Point> prigh
 
     double Xm = (pleft.back().x + pright.front().x) / 2.0;  // Находим Xm 
 
-    vector<Point> Pstripe;
+    vector<Point> Pstripe={Point(INFINITY,INFINITY),Point(-INFINITY,-INFINITY)};
 
     for (const Point& p : pleft) {
         if (abs(p.x - Xm) < d) {
