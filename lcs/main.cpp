@@ -1,10 +1,7 @@
-#define CATCH_CONFIG_RUNNER
 
-#include "../catch.hpp"
+#include "lcs.cpp"
 
-#include "lcs.h"
-
-int main(int argc, char* argv[]) {
-    int result = Catch::Session().run(argc, argv);
-    return result;
+using namespace std;
+int main() {
+    LCS("kalashki","kakashki");
 }
