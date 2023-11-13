@@ -4,6 +4,7 @@
 #include <vector>
 #include <tuple>
 #include <initializer_list>
+#include <cmath>
 
 /**
  * Non-oriented weighted graph.
