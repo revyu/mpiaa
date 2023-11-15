@@ -3,14 +3,10 @@
 using namespace std;
 
 vector <int> build_path(vector <int> parent,int start,int end){
-
+    return parent;
 }
 
-int get_min_dist(Graph &graph,vector<double> distances){
-
-}
-
-void shortest_path(const Graph &graph, int start, int end) {
+vector<int> my_shortest_path(const Graph &graph, int start, int end) {
     // Return shortest path in the graph from start vertex to end vertex as array of vertices.
     // First item in the result should be start vertex, last - end vertex.
     // Return empty array if there is no path.
@@ -37,16 +33,19 @@ void shortest_path(const Graph &graph, int start, int end) {
                 min_dist=distances[i];
             }
         }
+
+        auto it = find(Q.begin(), Q.end(), min_vertex);
+        Q.erase(it);
+
         if (min_vertex==end){build_path(parent,start,end);}
-        vector<int> adjacent_vertices=get_adjacent_vertices(min_vertex);
+        vector<int> adjacent_vertices=graph.get_adjacent_vertices(min_vertex);
         for (const auto vertex:adjacent_vertices){
-            if (distances[vertex]>distances[min_vertex]+edge_weight(min_vertex)){
-                distances[vertex]=distances[min_vertex]+edge_weight(min_vertex);
+            if (distances[vertex]>distances[min_vertex]+graph.edge_weight(min_vertex,vertex)){
+                distances[vertex]=distances[min_vertex]+graph.edge_weight(min_vertex,vertex);
                 parent[vertex]=min_vertex;
 
             }
         }
-
     }
 
 

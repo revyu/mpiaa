@@ -5,6 +5,8 @@
 #include <tuple>
 #include <initializer_list>
 #include <cmath>
+#include <algorithm>
+#include <iostream>
 
 /**
  * Non-oriented weighted graph.
@@ -47,3 +49,4 @@ public:
 private:
     std::map<int, std::map<int, double>> vertices;
 };
+
